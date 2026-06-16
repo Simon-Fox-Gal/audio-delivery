@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>64 Hz Tone / 8 Hz AM Test Set — Dieter Broers</title>
+  <title>64-Hz-Ton / 8-Hz-AM-Testreihe — Dieter Broers</title>
   <style>
     :root {
       --bg: #0b1117;
@@ -14,7 +14,6 @@
       --line: rgba(159, 180, 195, 0.24);
       --accent: #72d6ff;
       --accent-2: #b8f2dd;
-      --warn: #ffd166;
       --shadow: 0 24px 70px rgba(0,0,0,0.32);
       --radius: 20px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -44,7 +43,7 @@
     .condition { display: flex; justify-content: space-between; gap: 18px; align-items: baseline; margin-bottom: 10px; }
     .condition h3 { margin: 0; font-size: 1.25rem; letter-spacing: -0.02em; }
     .badge { white-space: nowrap; border: 1px solid rgba(114,214,255,0.36); color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 0.82rem; font-weight: 700; }
-    audio { width: 100%; margin: 12px 0 14px; filter: invert(1) hue-rotate(180deg); opacity: 0.92; }
+    .player-frame { width: 100%; height: 86px; margin: 12px 0 14px; border: 1px solid var(--line); border-radius: 14px; background: #0b1117; }
     .filename { color: var(--muted); font-size: 0.84rem; overflow-wrap: anywhere; min-height: 2.5em; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     a.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(114,214,255,0.42); background: rgba(114,214,255,0.10); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.94rem; }
@@ -59,66 +58,66 @@
 <body>
   <main class="wrap">
     <header>
-      <div class="kicker"><span class="dot"></span>Scientific audio test distribution</div>
-      <h1>64 Hz Carrier with 8 Hz Isochronal Amplitude Modulation</h1>
-      <p class="subtitle">A four-condition WAV test set prepared for Dieter Broers. Each file contains a 64 Hz tone with successive 8 Hz amplitude-modulation depth, provided for controlled listening, comparison and download.</p>
-      <div class="meta-grid" aria-label="Project metadata">
-        <div class="meta"><span>Prepared for</span><strong>Dieter Broers</strong></div>
-        <div class="meta"><span>Created by</span><strong>Simon Fox</strong></div>
-        <div class="meta"><span>Carrier</span><strong>64 Hz tone</strong></div>
-        <div class="meta"><span>Modulation</span><strong>8 Hz AM</strong></div>
+      <div class="kicker"><span class="dot"></span>Wissenschaftliche Audio-Testreihe</div>
+      <h1>64-Hz-Träger mit 8-Hz-isochroner Amplitudenmodulation</h1>
+      <p class="subtitle">Eine vierteilige WAV-Testreihe, vorbereitet für Dieter Broers. Jede Datei enthält einen 64-Hz-Ton mit schrittweise erhöhter 8-Hz-Amplitudenmodulation, bereitgestellt für kontrolliertes Hören, Vergleichen und Herunterladen.</p>
+      <div class="meta-grid" aria-label="Projekt-Metadaten">
+        <div class="meta"><span>Vorbereitet für</span><strong>Dieter Broers</strong></div>
+        <div class="meta"><span>Erstellt von</span><strong>Simon Fox</strong></div>
+        <div class="meta"><span>Trägerfrequenz</span><strong>64-Hz-Ton</strong></div>
+        <div class="meta"><span>Modulation</span><strong>8-Hz-AM</strong></div>
       </div>
     </header>
     <section>
       <div class="section-inner">
-        <h2>Test protocol</h2>
-        <p>These files are not presented as a music release. They are a compact experimental audio set for comparing the perceptual and field-related effects of a fixed 64 Hz carrier under increasing 8 Hz isochronal amplitude modulation.</p>
+        <h2>Testprotokoll</h2>
+        <p>Diese Dateien sind nicht als Musikveröffentlichung gedacht. Es handelt sich um eine kompakte experimentelle Audio-Testreihe zum Vergleich der wahrnehmbaren und feldbezogenen Wirkung eines festen 64-Hz-Trägers bei zunehmender 8-Hz-isochroner Amplitudenmodulation.</p>
         <div class="specs">
-          <div class="spec"><b>Carrier frequency</b><p>64 Hz continuous tonal component.</p></div>
-          <div class="spec"><b>Modulation frequency</b><p>8 Hz isochronal amplitude modulation.</p></div>
-          <div class="spec"><b>Variable parameter</b><p>Modulation depth: 0%, 10%, 20%, 30%.</p></div>
+          <div class="spec"><b>Trägerfrequenz</b><p>Kontinuierliche tonale Komponente bei 64 Hz.</p></div>
+          <div class="spec"><b>Modulationsfrequenz</b><p>Isochrone Amplitudenmodulation bei 8 Hz.</p></div>
+          <div class="spec"><b>Variable</b><p>Modulationstiefe: 0 %, 10 %, 20 %, 30 %.</p></div>
         </div>
       </div>
     </section>
     <section>
       <div class="section-inner">
-        <h2>Individual WAV files</h2>
-        <p>Select a condition below to play directly in the browser, open the Google Drive preview, or download the individual WAV file.</p>
+        <h2>Einzelne WAV-Dateien</h2>
+        <p>Wählen Sie unten eine Testbedingung aus. Die eingebettete Wiedergabe nutzt die Google-Drive-Vorschau; die Dateien können außerdem einzeln geöffnet oder heruntergeladen werden.</p>
         <div class="files">
           <article class="card">
-            <div class="condition"><h3>Reference</h3><span class="badge">0% modulation</span></div>
-            <audio controls preload="none" src="https://drive.google.com/uc?export=download&id=18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y"></audio>
-            <div class="filename">64Hz 0% mod · 48 kHz WAV · 34.1 MB</div>
+            <div class="condition"><h3>Referenz</h3><span class="badge">0 % Modulation</span></div>
+            <iframe class="player-frame" src="https://drive.google.com/file/d/18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y/preview" allow="autoplay" loading="lazy"></iframe>
+            <div class="filename">64Hz 0% mod · 48 kHz WAV · 34,1 MB</div>
             <div class="actions">
-              <a class="button" href="https://drive.google.com/uc?export=download&id=18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y">Download WAV</a>
-              <a class="button secondary" href="https://drive.google.com/file/d/18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y/preview" target="_blank" rel="noopener">Open preview</a>
+              <a class="button" href="https://drive.google.com/uc?export=download&id=18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y">WAV herunterladen</a>
+              <a class="button secondary" href="https://drive.google.com/file/d/18hTZ7Ld3fdcSzZ4o01HdifmMoLQroW-y/preview" target="_blank" rel="noopener">Vorschau öffnen</a>
             </div>
           </article>
           <article class="card">
-            <div class="condition"><h3>Test Condition 1</h3><span class="badge">10% modulation</span></div>
-            <audio controls preload="none" src="https://drive.google.com/uc?export=download&id=1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo"></audio>
-            <div class="filename">64Hz 10% mod · 48 kHz WAV · 33.1 MB</div>
+            <div class="condition"><h3>Testbedingung 1</h3><span class="badge">10 % Modulation</span></div>
+            <iframe class="player-frame" src="https://drive.google.com/file/d/1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo/preview" allow="autoplay" loading="lazy"></iframe>
+            <div class="filename">64Hz 10% mod · 48 kHz WAV · 33,1 MB</div>
             <div class="actions">
-              <a class="button" href="https://drive.google.com/uc?export=download&id=1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo">Download WAV</a>
-              <a class="button secondary" href="https://drive.google.com/file/d/1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo/preview" target="_blank" rel="noopener">Open preview</a>
+              <a class="button" href="https://drive.google.com/uc?export=download&id=1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo">WAV herunterladen</a>
+              <a class="button secondary" href="https://drive.google.com/file/d/1xapeIoHDAMYqza0uQyBDHSvSi4oKGEPo/preview" target="_blank" rel="noopener">Vorschau öffnen</a>
             </div>
           </article>
           <article class="card">
-            <div class="condition"><h3>Test Condition 2</h3><span class="badge">20% modulation</span></div>
-            <audio controls preload="none" src="https://drive.google.com/uc?export=download&id=1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr"></audio>
-            <div class="filename">64Hz 20% mod · 48 kHz WAV · 33.7 MB</div>
+            <div class="condition"><h3>Testbedingung 2</h3><span class="badge">20 % Modulation</span></div>
+            <iframe class="player-frame" src="https://drive.google.com/file/d/1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr/preview" allow="autoplay" loading="lazy"></iframe>
+            <div class="filename">64Hz 20% mod · 48 kHz WAV · 33,7 MB</div>
             <div class="actions">
-              <a class="button" href="https://drive.google.com/uc?export=download&id=1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr">Download WAV</a>
-              <a class="button secondary" href="https://drive.google.com/file/d/1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr/preview" target="_blank" rel="noopener">Open preview</a>
+              <a class="button" href="https://drive.google.com/uc?export=download&id=1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr">WAV herunterladen</a>
+              <a class="button secondary" href="https://drive.google.com/file/d/1W5pmG6JuM6ElNCy-no7hsNwN30GEvsgr/preview" target="_blank" rel="noopener">Vorschau öffnen</a>
             </div>
           </article>
           <article class="card">
-            <div class="condition"><h3>Test Condition 3</h3><span class="badge">30% modulation</span></div>
-            <audio controls preload="none" src="https://drive.google.com/uc?export=download&id=1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon"></audio>
-            <div class="filename">64Hz 30% mod · 48 kHz WAV · 33.0 MB</div>
+            <div class="condition"><h3>Testbedingung 3</h3><span class="badge">30 % Modulation</span></div>
+            <iframe class="player-frame" src="https://drive.google.com/file/d/1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon/preview" allow="autoplay" loading="lazy"></iframe>
+            <div class="filename">64Hz 30% mod · 48 kHz WAV · 33,0 MB</div>
             <div class="actions">
-              <a class="button" href="https://drive.google.com/uc?export=download&id=1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon">Download WAV</a>
-              <a class="button secondary" href="https://drive.google.com/file/d/1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon/preview" target="_blank" rel="noopener">Open preview</a>
+              <a class="button" href="https://drive.google.com/uc?export=download&id=1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon">WAV herunterladen</a>
+              <a class="button secondary" href="https://drive.google.com/file/d/1g7dZ0aSBj1lAVD94Id3FxzGkt1XUKjon/preview" target="_blank" rel="noopener">Vorschau öffnen</a>
             </div>
           </article>
         </div>
@@ -126,17 +125,17 @@
     </section>
     <section>
       <div class="section-inner">
-        <h2>Complete set</h2>
+        <h2>Gesamte Testreihe</h2>
         <div class="zip">
           <div>
-            <strong>Download all four WAV files as one ZIP archive</strong>
-            <p>Use this option for offline testing or transfer of the complete condition set.</p>
+            <strong>Alle vier WAV-Dateien als ZIP-Archiv herunterladen</strong>
+            <p>Diese Option eignet sich für Offline-Tests oder für die Weitergabe der vollständigen Testreihe.</p>
           </div>
-          <a class="button" href="https://drive.google.com/uc?export=download&id=1TRj75FdJMHDbUD1xQ2kYiGV_TxbeLzFz">Download ZIP</a>
+          <a class="button" href="https://drive.google.com/uc?export=download&id=1TRj75FdJMHDbUD1xQ2kYiGV_TxbeLzFz">ZIP herunterladen</a>
         </div>
       </div>
     </section>
-    <footer>64 Hz / 8 Hz AM test set · Created by Simon Fox · Prepared for Dieter Broers</footer>
+    <footer>64-Hz- / 8-Hz-AM-Testreihe · Erstellt von Simon Fox · Vorbereitet für Dieter Broers</footer>
   </main>
 </body>
 </html>
