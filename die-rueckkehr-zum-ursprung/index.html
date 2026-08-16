@@ -194,6 +194,12 @@
     .download-icon { color: var(--gold-soft); flex: 0 0 auto; }
     .folder-link { margin-top: 22px; display: inline-block; color: var(--gold-soft); text-underline-offset: 4px; font-size: .88rem; }
 
+    .story { border-top: 1px solid var(--line); background: radial-gradient(circle at 84% 18%, rgba(59,108,79,.14), transparent 30rem); }
+    .story-lead { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(38px, 8vw, 112px); align-items: start; }
+    .story-copy { padding-top: 5px; }
+    .story-copy p { margin: 0; color: #c8ccc2; font-size: 1.04rem; }
+    .story-copy p + p { margin-top: 18px; color: var(--muted); }
+
     .journey { border-block: 1px solid var(--line); background: rgba(0,0,0,.12); }
     .journey-head { display: grid; grid-template-columns: .85fr 1.15fr; gap: 58px; align-items: end; }
     .journey-head .section-intro { margin: 0; }
@@ -217,10 +223,23 @@
     .credit-list dd { margin: 0; font-family: Georgia, serif; font-size: 1.22rem; }
     .licensed { margin-top: 28px; color: var(--muted); font-size: .9rem; }
 
-    .contents-note { margin-top: 48px; padding: clamp(26px, 4vw, 40px); border-radius: 18px; background: rgba(213,180,101,.055); border: 1px solid var(--line); }
-    .contents-note h3 { margin: 0; color: var(--gold-soft); font-size: 1.35rem; }
-    .contents-note > p { margin: 9px 0 0; color: var(--muted); }
-    .contents-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 30px; margin: 25px 0 0; padding: 0; list-style: none; }
+    .contents-note { margin-top: 48px; padding: clamp(28px, 5vw, 52px); border-radius: 22px; background: linear-gradient(145deg, rgba(213,180,101,.07), rgba(20,47,35,.42)); border: 1px solid var(--line); }
+    .contents-head { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(28px, 6vw, 74px); align-items: end; }
+    .contents-note h3 { margin: 0; color: var(--gold-soft); font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.02; }
+    .contents-head > p { margin: 0; color: var(--muted); font-size: 1.02rem; }
+    .signal-story { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; margin-top: 38px; }
+    .signal-cell { display: flex; flex-direction: column; justify-content: center; min-height: 104px; padding: 18px; border-radius: 15px; background: rgba(0,0,0,.18); border: 1px solid rgba(255,255,255,.075); }
+    .signal-cell span { color: var(--gold); font-size: .65rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .signal-cell strong { display: block; margin-top: 5px; font-size: .92rem; line-height: 1.35; }
+    .signal-cell small { display: block; margin-top: 7px; color: var(--soft); }
+    .signal-cell.result { border-color: rgba(213,180,101,.36); background: rgba(213,180,101,.075); }
+    .signal-operator { align-self: center; color: var(--gold); font: 400 1.3rem/1 Georgia, serif; }
+    .resonance-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; margin-top: 32px; }
+    .resonance-copy p { margin: 0; color: #c8ccc2; }
+    .resonance-copy strong { display: block; margin-bottom: 5px; color: var(--gold-soft); font-family: Georgia, serif; font-size: 1.08rem; font-weight: 400; }
+    .contents-details { margin-top: 32px; padding-top: 27px; border-top: 1px solid rgba(255,255,255,.08); }
+    .contents-details h4 { margin: 0; color: var(--muted); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; }
+    .contents-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 30px; margin: 20px 0 0; padding: 0; list-style: none; }
     .contents-list li { position: relative; padding-left: 20px; color: #c8ccc2; }
     .contents-list li::before { content: "◆"; position: absolute; left: 0; top: .12em; color: var(--gold); font-size: .58rem; }
 
@@ -234,9 +253,11 @@
       .hero-copy { text-align: center; }
       .lede { margin-inline: auto; }
       .hero-actions, .release-strip { justify-content: center; }
-      .track-grid, .journey-head, .credits-grid, .contents-list { grid-template-columns: 1fr; }
+      .track-grid, .journey-head, .credits-grid, .story-lead, .contents-head, .resonance-copy, .contents-list { grid-template-columns: 1fr; }
       .journey-head { gap: 24px; }
       .stage-card { grid-template-columns: 1fr; gap: 10px; }
+      .signal-story { grid-template-columns: 1fr; }
+      .signal-operator { transform: rotate(90deg); justify-self: center; }
     }
     @media (max-width: 560px) {
       .shell { width: min(100% - 26px, 1180px); }
@@ -272,6 +293,7 @@
               Masterdateien
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3v11.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6V3h2Zm-7 17h14v2H5v-2Z"/></svg>
             </a>
+            <a class="button secondary" href="#story">Story &amp; Klangarchitektur</a>
             <a class="button secondary" href="#reise">Die sechs Stationen</a>
           </div>
           <div class="release-strip" aria-label="Veröffentlichungsdetails">
@@ -333,17 +355,54 @@
           </article>
         </div>
         <a class="folder-link" href="https://drive.google.com/drive/folders/1RttW2Rky1ga0u_NFxPxthWUwOBT5cnwM" target="_blank" rel="noopener">Alle Masterdateien in Google Drive ansehen ↗</a>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="shell">
+        <div class="story-lead">
+          <div>
+            <p class="section-kicker">Die Story</p>
+            <h2>Die Rückkehr ist kein Zurück</h2>
+          </div>
+          <div class="story-copy">
+            <p>Der Ursprung erscheint in dieser Klangreise nicht als vergangener Zeitpunkt oder entfernter Ort, sondern als eine fortwährend gegenwärtige Ordnung. Die Reise führt aus dem Rauschen der äußeren Welt in den Ursprungsraum, öffnet von dort den Blick auf Mutter Erde und das Erwachen der Menschheit und mündet in Vereinigung und Urklang.</p>
+            <p>Ihre letzte Bewegung ist die Verkörperung: Das Erfahrene bleibt nicht in einem entrückten inneren Raum, sondern wird zurück in den Körper, in die materielle Wirklichkeit und damit in das konkrete Leben getragen.</p>
+          </div>
+        </div>
 
         <aside class="contents-note">
-          <h3>Klangliche Bestandteile</h3>
-          <p>Neben der gesprochenen Führung der geführten Fassung enthält die Klanggestaltung beider Tracks:</p>
-          <ul class="contents-list">
-            <li>Musik aus realen Klangaufnahmen instrumentaler Drones, menschlicher Stimmen und analoger Synthesizerklänge</li>
-            <li>einen mit 8 Hz amplitudenmodulierten 40-Hz-Ton</li>
-            <li>binaurale Beats bei 8 Hz mit im Verlauf der Klangreise sinkenden, mit der Musik harmonisierenden Trägerfrequenzen</li>
-            <li>ein Fractal-Noise-Resonanzsignal</li>
-            <li>akustische Aufnahmen von Waldwind</li>
-          </ul>
+          <div class="contents-head">
+            <div>
+              <p class="section-kicker">Klangarchitektur</p>
+              <h3>Resonanz statt Vorgabe</h3>
+            </div>
+            <p>Die binauralen Elemente dieser Klangreise sind nicht als isoliertes, starres Frequenzsignal angelegt, das einen bestimmten Bewusstseinszustand vorgeben soll. Sie sind Teil der musikalischen Bewegung und verändern sich organisch mit ihr.</p>
+          </div>
+
+          <div class="signal-story" aria-label="Entstehung der binauralen 8-Hertz-Differenz beim Hören über Kopfhörer">
+            <div class="signal-cell"><span>Linkes Ohr</span><strong>hörbare Trägerfrequenz</strong></div>
+            <div class="signal-operator" aria-hidden="true">+</div>
+            <div class="signal-cell"><span>Rechtes Ohr</span><strong>um 8 Hz versetzte Trägerfrequenz</strong></div>
+            <div class="signal-operator" aria-hidden="true">→</div>
+            <div class="signal-cell result"><span>Im Hören</span><strong>8-Hz-Differenz</strong><small>kein physisch wiederzugebender 8-Hz-Ton</small></div>
+          </div>
+
+          <div class="resonance-copy">
+            <p><strong>Beweglich und musikalisch eingebettet</strong>Die hörbaren Trägerfrequenzen sinken im Verlauf der Reise allmählich ab. Sie werden jeweils so gewählt, dass sie mit dem umgebenden Klang harmonieren, statt als davon getrennter technischer Effekt hervorzutreten.</p>
+            <p><strong>Ein Raum für die eigene Antwort</strong>Die Klangarchitektur soll dem hörenden Menschen keinen fremden Rhythmus aufzwingen. Sie bietet einen Raum an, in dem das eigene System antworten und seine eigene Form von Resonanz entwickeln kann.</p>
+          </div>
+
+          <div class="contents-details">
+            <h4>Bestandteile des Klangraums</h4>
+            <ul class="contents-list">
+              <li>von Simon Fox aus realen Audio-Loops gestaltete Musik mit instrumentalen Drones, menschlichen Stimmen und analogen Synthesizerklängen</li>
+              <li>ein mit 8 Hz amplitudenmodulierter 40-Hz-Ton</li>
+              <li>binaurale 8-Hz-Differenz mit sinkenden, musikalisch harmonisierten Trägerfrequenzen</li>
+              <li>ein Fractal-Noise-Resonanzsignal als energetisches Rückgrat</li>
+              <li>akustische Aufnahmen von Waldwind</li>
+            </ul>
+          </div>
         </aside>
       </div>
     </section>
