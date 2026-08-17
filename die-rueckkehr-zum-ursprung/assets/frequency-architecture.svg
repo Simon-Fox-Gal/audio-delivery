@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 520" role="img" aria-labelledby="title desc">
+  <title id="title">Die klangliche Gestaltung</title><desc id="desc">Musik, Stimme, Naturklänge und Frequenzbeziehungen über einem Fractal-Noise-Resonanzsignal.</desc>
+  <rect width="1400" height="520" rx="16" fill="#f4f6f7"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g transform="translate(50 45)">
+      <g><rect width="300" height="130" fill="#fff" stroke="#dce1e4"/><text x="25" y="34" font-size="16" font-weight="700" fill="#168ec4" letter-spacing="2">MUSIK</text><text x="25" y="69" font-size="21" font-weight="700" fill="#111">Instrumentale Drones</text><text x="25" y="99" font-size="18" fill="#62686d">analoge Synthesizerklänge</text></g>
+      <g transform="translate(325)"><rect width="300" height="130" fill="#fff" stroke="#dce1e4"/><text x="25" y="34" font-size="16" font-weight="700" fill="#168ec4" letter-spacing="2">STIMME</text><text x="25" y="69" font-size="21" font-weight="700" fill="#111">Gesprochene Führung</text><text x="25" y="99" font-size="18" fill="#62686d">eingebettete Vokalklänge</text></g>
+      <g transform="translate(650)"><rect width="300" height="130" fill="#fff" stroke="#dce1e4"/><text x="25" y="34" font-size="16" font-weight="700" fill="#168ec4" letter-spacing="2">NATURKLÄNGE</text><text x="25" y="69" font-size="21" font-weight="700" fill="#111">Wind in einem Wald</text><text x="25" y="99" font-size="18" fill="#62686d">akustische Aufnahmen</text></g>
+      <g transform="translate(975)"><rect width="300" height="130" fill="#fff" stroke="#dce1e4"/><text x="25" y="34" font-size="16" font-weight="700" fill="#168ec4" letter-spacing="2">FREQUENZEN</text><text x="25" y="69" font-size="21" font-weight="700" fill="#111">8-Hz-Differenz</text><text x="25" y="99" font-size="18" fill="#62686d">40 Hz × 8 Hz AM</text></g>
+    </g>
+    <g transform="translate(50 205)"><rect width="1275" height="62" fill="#111"/><text x="25" y="39" font-size="17" font-weight="700" fill="#59c4ef" letter-spacing="2">ENERGETISCHES RÜCKGRAT</text><text x="340" y="39" font-size="20" fill="#fff">Fractal-Noise-Resonanzsignal</text></g>
+    <g transform="translate(50 305)">
+      <rect width="770" height="160" fill="#fff" stroke="#dce1e4"/>
+      <text x="24" y="34" font-size="17" font-weight="700" fill="#111">BINAURALE DIFFERENZ VON 8 HZ</text>
+      <g transform="translate(24 60)" text-anchor="middle"><rect width="190" height="70" fill="#eaf7fc"/><text x="95" y="30" font-size="16" font-weight="700" fill="#0876ad">LINKER KANAL</text><text x="95" y="53" font-size="14" fill="#62686d">hörbarer Träger</text><text x="217" y="43" font-size="26" fill="#168ec4">+</text><rect x="245" width="210" height="70" fill="#eaf7fc"/><text x="350" y="30" font-size="16" font-weight="700" fill="#0876ad">RECHTER KANAL</text><text x="350" y="53" font-size="14" fill="#62686d">um 8 Hz versetzt</text><text x="483" y="43" font-size="26" fill="#168ec4">→</text><rect x="520" width="200" height="70" fill="#111"/><text x="620" y="30" font-size="16" font-weight="700" fill="#59c4ef">IM HÖREN</text><text x="620" y="53" font-size="15" fill="#fff">8-Hz-Differenz</text></g>
+    </g>
+    <g transform="translate(845 305)"><rect width="480" height="160" fill="#fff" stroke="#dce1e4"/><text x="24" y="34" font-size="17" font-weight="700" fill="#111">40-HZ-SIGNAL</text><rect x="24" y="60" width="432" height="70" fill="#111"/><text x="240" y="104" font-size="27" font-weight="700" fill="#fff" text-anchor="middle">40 Hz <tspan fill="#59c4ef">×</tspan> 8 Hz AM</text></g>
+  </g>
+</svg>
