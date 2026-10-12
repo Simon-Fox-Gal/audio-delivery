@@ -7,6 +7,11 @@
 @media(max-width:1000px){header{height:auto;padding:23px;align-items:flex-start}.intro{max-width:320px}.workspace{height:auto;min-height:0;grid-template-columns:1fr}.library{border-right:0;border-bottom:1px solid var(--line);padding:18px 20px}.library-head{margin-bottom:12px}.tracks{display:flex;overflow:auto;gap:8px;padding-bottom:6px;scrollbar-width:thin}.track{min-width:205px;max-width:205px;background:#222c25;padding:12px}.library-foot{display:none}.screen{padding:20px}.stage{grid-template-rows:auto auto}.record{grid-template-columns:200px 1fr}.coverwrap,.cover{width:200px}.cover,.sleeve{height:200px}.track-copy{max-height:none;overflow:visible}.lower{grid-template-columns:minmax(240px,.7fr) minmax(0,1fr);min-height:530px}.notecontent{max-height:480px}.player{min-height:530px}footer{height:auto;padding:16px 20px;flex-wrap:wrap}.expanded .playwindow{min-height:0}.expanded iframe{min-height:0}}
 @media(max-width:650px){header{display:block;padding:20px}.intro{max-width:100%;margin-top:16px;font-size:12px}h1{font-size:29px}.workspace{display:block}.screen{padding:18px}.record{grid-template-columns:124px minmax(0,1fr);gap:18px}.coverwrap,.cover{width:124px}.cover,.sleeve{height:124px}.sleeve{padding:10px}.sleeve p{font-size:6px}.sleeve h3{font-size:20px;margin:10px 0}.sleeve p:last-child{display:none}.caption{font-size:8px}h2{font-size:25px}.composer{font-size:9px}.album{font-size:12px}.release{font-size:10px}.tag{font-size:9px}.lower{display:flex;flex-direction:column;min-height:0;gap:22px}.player{order:-1;min-height:525px}.playwindow,iframe{min-height:350px}.notes{min-height:250px}.notecontent{max-height:380px}.screen{gap:15px}.topline{font-size:9px}.player.expanded{inset:10px}.tabs button{font-size:12px}.track{min-width:195px}footer{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Keep transport and download guidance visible at every desktop height. */
+.player-head,.player-actions,.help{flex-shrink:0}.playwindow{min-height:200px}iframe{min-height:200px}.track{padding-block:10px}.track strong{font-size:16px}.track .time{margin-top:3px}.library-foot{padding-top:15px}.library-foot br+br{display:none}
+@media(max-width:1000px){.playwindow,iframe{min-height:300px}}
+@media(max-width:650px){.playwindow,iframe{min-height:350px}}
 </style></head><body>
 <header><div class="identity"><div class="mark" aria-hidden="true">sf</div><div><div class="eyebrow">Simon Fox · Listening collection</div><h1>Music &amp; resonance</h1></div></div><p class="intro">A selection from my recordings. Every track includes <strong>Hathor Resonance (fractal noise)</strong>, woven into the music.</p></header>
 <main class="workspace"><aside class="library"><div class="library-head"><span>Choose a recording</span><span>07</span></div><nav class="tracks" id="tracks" aria-label="Choose a track"></nav><div class="library-foot"><span>A shared thread</span>Opera, chamber music, music along the Danube, and a meditation journey.<br><br>All include Hathor Resonance. The meditation carries it at a much higher level.</div></aside>
@@ -69,7 +74,7 @@
     "id": "17shxK-b29upwbKNLmD58uMjZRkZRvCYS",
     "title": "Elegy for Viola, String Quartet and String Orchestra",
     "composer": "Herbert Howells",
-    "short": "The Ballad of the Salty Sea",
+    "short": "Elegy · Viola & strings",
     "album": "The Ballad of the Salty Sea",
     "cover": "assets/salty.jpg",
     "position": "Track 1",
