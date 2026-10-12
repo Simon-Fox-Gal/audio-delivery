@@ -41,6 +41,9 @@
     .warning{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;margin:22px 0;padding:19px 22px;border:1px solid rgba(213,174,104,.7);border-left:5px solid var(--brass);border-radius:17px;background:linear-gradient(100deg,rgba(117,62,67,.2),rgba(213,174,104,.08))}
     .warning-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;color:#1b1711;background:var(--brass);font-weight:1000;font-size:1.2rem}
     .warning strong{display:block;color:#ffe1aa;letter-spacing:.02em}.warning p{margin:3px 0 0;color:#ded2c1}
+    .master-panel{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 26px;padding:22px 25px;border:1px solid rgba(213,174,104,.55);border-radius:20px;background:linear-gradient(110deg,rgba(213,174,104,.12),rgba(82,106,120,.12))}
+    .master-panel h2{margin:4px 0;font-size:1.65rem;line-height:1.1;color:#fff1d9}.master-panel p{margin:0;color:#d4c7b4;font-size:.9rem}
+    .wav-download{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:0 0 auto;padding:14px 19px;border:1px solid #f0cb87;border-radius:999px;background:var(--brass);color:#201a13;text-align:center;text-decoration:none;font-weight:900;line-height:1.2;box-shadow:0 7px 25px rgba(0,0,0,.24);transition:transform .18s ease,background .18s ease}.wav-download:hover{transform:translateY(-2px);background:#ecc37a}
     .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 40px}
     .jump{display:block;text-decoration:none;border:1px solid rgba(213,174,104,.22);border-radius:16px;background:rgba(255,255,255,.045);padding:15px 17px;transition:.2s ease}
     .jump:hover{transform:translateY(-2px);background:rgba(255,255,255,.08);border-color:rgba(213,174,104,.55)}
@@ -66,7 +69,7 @@
     .blurb{margin:28px 0 0;padding:22px 24px;border-left:2px solid var(--brass);background:linear-gradient(90deg,rgba(213,174,104,.07),transparent);color:#d3cabc}.blurb p{margin:0}.blurb p+p{margin-top:9px}
     footer{text-align:center;margin-top:46px;padding-top:22px;border-top:1px solid rgba(213,174,104,.19);color:#a39a8e;font-size:.8rem}footer strong{color:#d7c8ae}
     :focus-visible{outline:3px solid #e3bd79;outline-offset:3px;border-radius:4px}
-    @media(max-width:780px){.hero{grid-template-columns:1fr;min-height:unset}.hero:before{inset:42% 0 0}.hero:after{right:-9%;top:auto;bottom:-145px;transform:none}.hero-art{min-height:230px}.disc{width:220px}.quick{grid-template-columns:1fr}.program{grid-template-columns:1fr}.pdf-panel{grid-template-columns:1fr}.credits{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:9px}}
+    @media(max-width:780px){.master-panel{align-items:stretch;flex-direction:column}.wav-download{align-self:flex-start}.hero{grid-template-columns:1fr;min-height:unset}.hero:before{inset:42% 0 0}.hero:after{right:-9%;top:auto;bottom:-145px;transform:none}.hero-art{min-height:230px}.disc{width:220px}.quick{grid-template-columns:1fr}.program{grid-template-columns:1fr}.pdf-panel{grid-template-columns:1fr}.credits{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:9px}}
     @media(max-width:460px){.wrap{width:calc(100% - 24px);padding-top:22px}.topline{align-items:flex-start;flex-direction:column;gap:3px}.hero{padding:27px 22px;border-radius:22px}.track-top{grid-template-columns:40px 1fr auto;gap:10px;padding:15px 13px 12px}.number{width:36px;height:36px}.track h3{font-size:1.08rem}.duration{font-size:.75rem}.credits{grid-template-columns:1fr}.warning{grid-template-columns:35px 1fr;padding:16px}.warning-icon{width:32px;height:32px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
   </style>
@@ -87,6 +90,11 @@
     <section class="warning" aria-label="Wichtiger Hinweis zur Aufnahme">
       <div class="warning-icon" aria-hidden="true">!</div>
       <div><strong>Vorläufige Hörfassung – kein Produktionsmaster</strong><p>Die verwendeten MP3s stammen aus dem aktuellen Satz zu den 96-kHz-Mastern und dienen der internen Orientierung und zum Gegenhören. Schnitt, Mischung und Mastering sind noch nicht als endgültige Produktionsfassung freigegeben.</p></div>
+    </section>
+
+    <section class="master-panel" aria-labelledby="wav-title">
+      <div><div class="kicker">Alle Titel in einer Datei</div><h2 id="wav-title">Hi-Res WAV · 96 kHz / 24 Bit</h2><p>ZIP mit den WAV-Dateien aller 13 Titel · 2,24 GB · vorläufiger Stand, kein Produktionsmaster. Der Download erfolgt über Google Drive; dafür ist derzeit eine Freigabe erforderlich.</p></div>
+      <a class="wav-download" href="https://drive.google.com/uc?export=download&amp;id=1xtmg00NT9p_iwpjozUp9rpV5ib7yPFyf" target="_blank" rel="noopener noreferrer" aria-label="Alle 13 Hi-Res WAV-Titel als ZIP über Google Drive herunterladen">↓ Gesamtes WAV-ZIP herunterladen</a>
     </section>
 
     <nav class="quick" aria-label="Seitennavigation">
