@@ -6,7 +6,7 @@ The continuous listening copy concatenates the complete source PCM, in track ord
 
 `tracks.json` records exact source sample counts, cumulative start times, titles and Drive IDs. Track marker times are measured from the first audio sample, rather than the CD absolute timeline. Duration labels are truncated to whole seconds for display.
 
-Nine standalone join clips contain precisely the last 661,500 samples per channel of the preceding WAV and the first 220,500 samples of the next WAV. They are encoded once at 320 kbps; each decodes to 882,000 samples per channel (20 seconds). The join is at 15 seconds. There are no fades or added gaps. Native playback ends at the clip end, with a time-update stop as an additional guard.
+Nine standalone join clips contain precisely the last 1,323,000 samples per channel of the preceding WAV and the first 220,500 samples of the next WAV. They are encoded once at 320 kbps; each decodes to 1,543,500 samples per channel (35 seconds). The join is at 30 seconds. There are no fades or added gaps. Native playback ends at the clip end, with a time-update stop as an additional guard.
 
 Validation: JavaScript syntax; exact sample counts after decoding the continuous MP3 and each clip; byte-for-byte reconstruction of the continuous file; uploaded Git blob hashes against local files. Browser playback needs final human listening checks. Google Drive controls individual WAV preview and large-file download prompts.
 
