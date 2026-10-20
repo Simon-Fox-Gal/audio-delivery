@@ -1,0 +1,112 @@
+[
+  {
+    "file": "wav/01.wav",
+    "start": 0,
+    "duration": 677.2666666666667,
+    "frames": 29867460,
+    "id": "1YfB7mf6TuqfnpkK0vRatLsdUZ2Hfx0mi",
+    "work": "32 Variations on an Original Theme in C minor, WoO 80",
+    "movement": "",
+    "title": "32 Variations on an Original Theme in C minor, WoO 80",
+    "number": 1
+  },
+  {
+    "file": "wav/02.wav",
+    "start": 677.2666666666667,
+    "duration": 468.84,
+    "frames": 20675844,
+    "id": "1P3mVmVb7RKC60Qn-IHxRp6Gp8s9fWS_7",
+    "work": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\"",
+    "movement": "I. Grave - Allegro di molto e con brio",
+    "title": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\": I. Grave - Allegro di molto e con brio",
+    "number": 2
+  },
+  {
+    "file": "wav/03.wav",
+    "start": 1146.1066666666666,
+    "duration": 322.88,
+    "frames": 14239008,
+    "id": "1r6F-xQyGqZxynreuJcTjXVxy2-0mu2oD",
+    "work": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\"",
+    "movement": "II. Adagio cantabile",
+    "title": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\": II. Adagio cantabile",
+    "number": 3
+  },
+  {
+    "file": "wav/04.wav",
+    "start": 1468.9866666666667,
+    "duration": 313.12,
+    "frames": 13808592,
+    "id": "1o6_KgZOf8Y_L85JAl-Ix8Ul90lY-l8-5",
+    "work": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\"",
+    "movement": "III. Rondo: Allegro",
+    "title": "Piano Sonata No. 8 in C minor, Op. 13 \"Pathetique\": III. Rondo: Allegro",
+    "number": 4
+  },
+  {
+    "file": "wav/05.wav",
+    "start": 1782.1066666666666,
+    "duration": 618.44,
+    "frames": 27273204,
+    "id": "10sgUK1btnjqxgsb1Xda-eflW2BMpb7c0",
+    "work": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\"",
+    "movement": "I. Allegro assai",
+    "title": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\": I. Allegro assai",
+    "number": 5
+  },
+  {
+    "file": "wav/06.wav",
+    "start": 2400.5466666666666,
+    "duration": 372.44,
+    "frames": 16424604,
+    "id": "1YJg5Qj0YBPKFFHbHx--c8smDHzeijTGW",
+    "work": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\"",
+    "movement": "II. Andante con moto",
+    "title": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\": II. Andante con moto",
+    "number": 6
+  },
+  {
+    "file": "wav/07.wav",
+    "start": 2772.9866666666667,
+    "duration": 496.1066666666667,
+    "frames": 21878304,
+    "id": "1Yv5XRfIzWNdqLaD5mRjrO2jI_0SGUHQk",
+    "work": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\"",
+    "movement": "III. Allegro ma non troppo - Presto",
+    "title": "Piano Sonata No. 23 in F minor, Op. 57 \"Appassionata\": III. Allegro ma non troppo - Presto",
+    "number": 7
+  },
+  {
+    "file": "wav/08.wav",
+    "start": 3269.0933333333332,
+    "duration": 434.72,
+    "frames": 19171152,
+    "id": "1aKFB4kktbfTdH84-rxvSSGKMY9jdSTdD",
+    "work": "Piano Sonata No. 31 in A-flat major, Op. 110",
+    "movement": "I. Moderato cantabile molto espressivo",
+    "title": "Piano Sonata No. 31 in A-flat major, Op. 110: I. Moderato cantabile molto espressivo",
+    "number": 8
+  },
+  {
+    "file": "wav/09.wav",
+    "start": 3703.8133333333335,
+    "duration": 133.34666666666666,
+    "frames": 5880588,
+    "id": "1_VHcA1W7kOI7xzPfKuoBQEOe7kGJeGmT",
+    "work": "Piano Sonata No. 31 in A-flat major, Op. 110",
+    "movement": "II. Allegro molto",
+    "title": "Piano Sonata No. 31 in A-flat major, Op. 110: II. Allegro molto",
+    "number": 9
+  },
+  {
+    "file": "wav/10.wav",
+    "start": 3837.1600000000003,
+    "duration": 734.6266666666667,
+    "frames": 32397036,
+    "id": "1bT-JW32E1Q19-n9U5FA0HrYE31FSosqO",
+    "work": "Piano Sonata No. 31 in A-flat major, Op. 110",
+    "movement": "III. Adagio ma non troppo - Fuga: Allegro ma non troppo",
+    "title": "Piano Sonata No. 31 in A-flat major, Op. 110: III. Adagio ma non troppo - Fuga: Allegro ma non troppo",
+    "number": 10
+  }
+]

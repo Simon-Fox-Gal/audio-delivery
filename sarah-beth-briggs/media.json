@@ -1,0 +1,94 @@
+{
+  "parts": [
+    {
+      "url": "audio/continuous-00.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-01.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-02.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-03.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-04.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-05.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-06.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-07.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-08.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-09.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-10.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-11.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-12.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-13.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-14.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-15.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-16.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-17.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-18.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-19.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-20.bin",
+      "size": 8400000
+    },
+    {
+      "url": "audio/continuous-21.bin",
+      "size": 6475381
+    }
+  ],
+  "bytes": 182875381,
+  "duration": 4571.786666666667
+}
