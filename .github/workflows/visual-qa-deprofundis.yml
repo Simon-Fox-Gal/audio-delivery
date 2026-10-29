@@ -1,0 +1,65 @@
+name: Visual QA — De profundis listening edition
+on:
+  push:
+    paths:
+      - .github/workflows/visual-qa-deprofundis.yml
+      - de-profundis-agm-preview/index.html
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check code, paths, and the preserved audio controls
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('node:fs'),vm=require('node:vm');
+          const h=fs.readFileSync('de-profundis-agm-preview/index.html','utf8');
+          const scripts=[...h.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(x=>x[1]);
+          if(!scripts.length)throw Error('No inline player code');
+          scripts.forEach((source,i)=>new vm.Script(source,{filename:'inline-'+i+'.js'}));
+          const required=[
+            'audio/sound-relief.svg','audio/complete/index.m3u8',
+            'PEAK_HOLD_MS=5000','reliefScrubber.addEventListener',
+            'id="master-audio"','data-chapter="4"',
+            'id="db-l"','id="db-r"',
+            '1fJMgFq7ogUTiY4pBJaDOOOEOeAzQID37'
+          ];
+          for(const pattern of required)if(!h.includes(pattern))throw Error('Missing '+pattern);
+          if((h.match(/data-chapter=/g)||[]).length!==5)throw Error('Wrong chapter count');
+          if(h.includes('Hans Gál Society'))throw Error('Old organization text found');
+          if(h.includes('preliminary'))throw Error('Old edition wording found');
+          const svg=fs.readFileSync('de-profundis-agm-preview/audio/sound-relief.svg','utf8');
+          if(!svg.includes('Line positions modulated by short-time RMS'))throw Error('Missing audio provenance');
+          console.log('PASS / Page JS parses; five movement buttons; 5-second peak hold; actual-audio artwork; ZIP; legacy references removed.');
+          NODE
+      - name: Screenshot the desktop and mobile experience
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --directory de-profundis-agm-preview >/tmp/preview-http.log 2>&1 &
+          sleep 2
+          chrome=$(command -v google-chrome || command -v chromium || true)
+          if [ -z "$chrome" ]; then
+            echo "Chromium not on runner; only static QA done"
+            exit 0
+          fi
+          mkdir -p /tmp/visuals
+          "$chrome" --headless --no-sandbox --disable-dev-shm-usage --hide-scrollbars --disable-gpu \
+            --window-size=1440,1100 --force-device-scale-factor=1 --virtual-time-budget=4500 \
+            --screenshot=/tmp/visuals/desktop.png http://127.0.0.1:8765/ >/tmp/chrome-desktop.log 2>&1
+          "$chrome" --headless --no-sandbox --disable-dev-shm-usage --hide-scrollbars --disable-gpu \
+            --window-size=440,1100 --force-device-scale-factor=1 --virtual-time-budget=4500 \
+            --screenshot=/tmp/visuals/mobile.png http://127.0.0.1:8765/ >/tmp/chrome-mobile.log 2>&1
+          file /tmp/visuals/*.png
+      - name: Retain visual proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: deprofundis-visual-qa
+          path: /tmp/visuals/*.png
+          if-no-files-found: warn
+          retention-days: 3
