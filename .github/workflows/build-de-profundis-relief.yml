@@ -114,13 +114,66 @@ jobs:
           print('RMS dB quantiles:',np.percentile(rms_db,[0,25,50,75,100]).round(1))
           PY
           /tmp/audio-art-venv/bin/python /tmp/audio_art.py
+      - name: Render the audio-derived engraving as a static SVG
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/render_relief.py <<'PY'
+          import json,math
+          import numpy as np
+          from pathlib import Path
+
+          src=Path('de-profundis-agm-preview/audio/sound-relief.json')
+          data=json.loads(src.read_text(encoding='utf-8'))
+          amp=np.asarray([row[0] for row in data['bins']])
+          bright=np.asarray([row[1] for row in data['bins']])
+          attack=np.asarray([row[2] for row in data['bins']])
+          smooth=np.convolve(np.pad(amp,(4,4),mode='edge'),np.ones(9)/9,mode='valid')
+          W,H=1400,460
+          ends=[2,1043.4,1429.08,2401.9067,3421.8133,float(data['durationSeconds'])]
+          parts=[
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" role="img" aria-label="Klangrelief aus der Aufnahme De profundis">',
+            '<metadata>Line positions modulated by short-time RMS, spectral centroid and envelope-attack characteristics of the 29 October 2026 recording.</metadata>',
+            '<defs><linearGradient id="ink" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#11191c"/><stop offset="1" stop-color="#080e11"/></linearGradient>',
+            '<linearGradient id="threads" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a8b6b0" stop-opacity=".40"/><stop offset=".3" stop-color="#d6c8ac" stop-opacity=".93"/><stop offset=".72" stop-color="#b6bbb0" stop-opacity=".83"/><stop offset="1" stop-color="#c3a477" stop-opacity=".62"/></linearGradient></defs>',
+            f'<rect width="{W}" height="{H}" fill="url(#ink)"/>'
+          ]
+          for i in range(5):
+            x=ends[i]/ends[-1]*W
+            width=(ends[i+1]-ends[i])/ends[-1]*W
+            if i==4:
+              parts.append(f'<rect x="{x:.1f}" width="{width:.1f}" height="{H}" fill="#9e8a70" opacity=".055"/>')
+            if i==2:
+              parts.append(f'<rect x="{x:.1f}" width="{width:.1f}" height="{H}" fill="#050b0e" opacity=".13"/>')
+          for i in range(56):
+            d=[]
+            for j in range(len(amp)):
+              t=j/(len(amp)-1)
+              x=t*W
+              e=float(smooth[j])
+              wave=14*math.sin(2*math.pi*t*1.43+i*.055)+7*math.cos(2*math.pi*t*2.7+i*.05)
+              tremolo=(2+5*float(attack[j]))*math.sin(2*math.pi*t*13.1+i*.13)
+              colour=3.8*(float(bright[j])-.5)*math.cos(2*math.pi*t*5.9+i*.3)
+              y=42+i*6.3+wave-(e-.42)*(32+i*.66)+tremolo+colour
+              d.append(('M' if j==0 else 'L')+f'{x:.1f},{y:.1f}')
+            opacity=.58+.3*i/55
+            parts.append(f'<path d="{" ".join(d)}" fill="none" stroke="url(#threads)" stroke-opacity="{opacity:.3f}" stroke-width="{.63+i/135:.3f}"/>')
+          for i in range(1,5):
+            x=ends[i]/ends[-1]*W
+            parts.append(f'<line x1="{x:.2f}" y1="0" x2="{x:.2f}" y2="{H}" stroke="#c8b394" opacity=".23" stroke-dasharray="1,7"/>')
+          parts.append('</svg>')
+          output=src.with_name('sound-relief.svg')
+          output.write_text(''.join(parts),encoding='utf-8')
+          print('Saved actual-audio-derived artwork:',output,'bytes:',output.stat().st_size)
+          PY
+          /tmp/audio-art-venv/bin/python /tmp/render_relief.py
       - name: Publish only the derived numerical artwork data
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add de-profundis-agm-preview/audio/sound-relief.json
+          git add de-profundis-agm-preview/audio/sound-relief.json de-profundis-agm-preview/audio/sound-relief.svg
           if ! git diff --cached --quiet; then
             git commit -m "Publish audio-derived De profundis relief data"
             git push
