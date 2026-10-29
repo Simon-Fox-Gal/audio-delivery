@@ -37,7 +37,7 @@ jobs:
           if(!svg.includes('Line positions modulated by short-time RMS'))throw Error('Missing audio provenance');
           console.log('PASS / Page JS parses; five movement buttons; 5-second peak hold; actual-audio artwork; ZIP; legacy references removed.');
           NODE
-      - name: Screenshot the desktop and mobile experience
+      - name: Render full-page screenshots and exercise the artwork navigation
         shell: bash
         run: |
           set -euo pipefail
@@ -45,16 +45,59 @@ jobs:
           sleep 2
           chrome=$(command -v google-chrome || command -v chromium || true)
           if [ -z "$chrome" ]; then
-            echo "Chromium not on runner; only static QA done"
+            echo "Browser unavailable: syntax and assets have still passed"
             exit 0
           fi
           mkdir -p /tmp/visuals
-          "$chrome" --headless --no-sandbox --disable-dev-shm-usage --hide-scrollbars --disable-gpu \
-            --window-size=1440,1100 --force-device-scale-factor=1 --virtual-time-budget=4500 \
-            --screenshot=/tmp/visuals/desktop.png http://127.0.0.1:8765/ >/tmp/chrome-desktop.log 2>&1
-          "$chrome" --headless --no-sandbox --disable-dev-shm-usage --hide-scrollbars --disable-gpu \
-            --window-size=440,1100 --force-device-scale-factor=1 --virtual-time-budget=4500 \
-            --screenshot=/tmp/visuals/mobile.png http://127.0.0.1:8765/ >/tmp/chrome-mobile.log 2>&1
+          npm install --silent --no-audit --no-fund --prefix /tmp/visual-qa playwright-core@1.57.0
+          cat > /tmp/visual-test.cjs <<'NODE'
+          const {chromium}=require('/tmp/visual-qa/node_modules/playwright-core');
+          (async()=>{
+            const browser=await chromium.launch({
+              executablePath:process.env.CHROME_BIN,
+              headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--autoplay-policy=no-user-gesture-required']
+            });
+            try {
+              for(const config of [
+                {name:'desktop',width:1440,height:1000,mobile:false},
+                {name:'mobile',width:390,height:844,mobile:true}
+              ]){
+                const context=await browser.newContext({
+                  viewport:{width:config.width,height:config.height},
+                  deviceScaleFactor:1,
+                  isMobile:config.mobile,hasTouch:config.mobile
+                });
+                const page=await context.newPage();
+                const errors=[];
+                page.on('pageerror',e=>errors.push(e.message));
+                await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded',timeout:60000});
+                await page.waitForFunction(()=>{
+                  const el=document.querySelector('img.relief-artwork');
+                  return el&&el.complete&&el.naturalWidth>0;
+                },null,{timeout:18000});
+                await page.screenshot({path:'/tmp/visuals/'+config.name+'-full.png',fullPage:true});
+                const width=await page.evaluate(()=>document.documentElement.scrollWidth);
+                if(width>config.width+3)throw Error(config.name+' horizontal overflow: '+width+'>'+config.width);
+                const loaded=await page.waitForFunction(()=>document.getElementById('master-audio').readyState>=1,null,{timeout:12000}).then(()=>true).catch(()=>false);
+                if(loaded){
+                  await page.locator('[data-chapter="3"]').click();
+                  await page.waitForTimeout(400);
+                  const v=await page.locator('#now-title').innerText();
+                  if(!v.includes('Totentanz'))throw Error('Chapter jump failed: '+v);
+                  await page.screenshot({path:'/tmp/visuals/'+config.name+'-active.png',fullPage:true});
+                }else console.log('Stream metadata did not load during visual test; separate published stream remains available');
+                await page.locator('#relief-scrubber').focus();
+                await page.keyboard.press('ArrowRight');
+                const slider=await page.locator('#relief-scrubber').getAttribute('aria-valuenow');
+                if(!Number.isFinite(Number(slider)))throw Error('Keyboard seeking slider invalid');
+                if(errors.length)throw Error(config.name+' browser JS errors: '+errors.join('; '));
+                console.log(config.name,'PASS, artwork visible, page width',width,'metadata loaded',loaded);
+                await context.close();
+              }
+            }finally{await browser.close();}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          CHROME_BIN="$chrome" node /tmp/visual-test.cjs
           file /tmp/visuals/*.png
       - name: Retain visual proof
         uses: actions/upload-artifact@v4
