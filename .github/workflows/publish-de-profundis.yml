@@ -20,6 +20,10 @@ jobs:
         run: |
           python3 -m venv /tmp/gdown-env
           /tmp/gdown-env/bin/pip install -q gdown
+      - name: Install FFmpeg and FFprobe
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
       - name: Download the link-shared preliminary master
         shell: bash
         run: |
