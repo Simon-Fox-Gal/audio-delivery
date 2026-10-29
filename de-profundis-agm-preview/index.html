@@ -310,6 +310,17 @@ footer{margin-top:82px}
   .relief-line{will-change:auto}
 }
 
+
+/* Precision polish after desktop and small-screen visual review. */
+.relief-zone{min-height:54px;align-items:center}
+.relief-zone strong{
+  white-space:normal;text-overflow:clip;line-height:1.2;
+  max-height:2.4em;overflow:hidden;display:block;
+}
+@media(max-width:650px){
+  .relief-artwork{filter:brightness(1.6) contrast(1.05)}
+  .relief-zone strong{display:none}
+}
 </style>
 </head>
 <body>
