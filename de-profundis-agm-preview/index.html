@@ -143,6 +143,173 @@ footer p{margin:0;max-width:660px}
   footer{flex-direction:column}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* 2026-10-29 · THE DEPTHS — edition-specific visual language.
+   Preservation: the streaming audio, metering, chapter data and downloads
+   are retained; the only new external asset is the measured-audio SVG. */
+:root{
+  --paper:#f0eee8;--paper2:#e9e6de;--ink:#151a1c;--secondary:#59615f;
+  --rule:#c7c6bf;--accent:#957452;--night:#151b1e;--night2:#1b2326;
+  --nightInk:#f0eee7;--nightDim:#a9b3b0;--nightLine:#415051;--signal:#dac19c;
+}
+body{
+  background:
+    radial-gradient(ellipse at 7% 1%,rgba(143,118,84,.045),transparent 36%),
+    radial-gradient(ellipse at 93% 12%,rgba(32,47,51,.04),transparent 27%),
+    var(--paper);
+}
+main{max-width:1264px;padding:0 44px 105px}
+.masthead{padding:24px 0 21px;border-bottom:1px solid var(--rule)}
+.masthead .brand{font-size:10px;letter-spacing:.155em;word-spacing:.03em}
+.masthead .record{font-size:10px;letter-spacing:.2em}
+.hero-award{display:block;padding:52px 0 36px}
+.hero-eyebrow{display:flex;gap:18px;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--accent)}
+.hero-edition{color:var(--secondary);font-size:9px}
+.hero-heading{position:relative;margin:24px 0 13px}
+.hero-composer{display:block;font-size:13px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#252a2b;margin:0 0 3px 5px}
+.hero-opus{color:var(--accent);font-size:10px;letter-spacing:.14em;vertical-align:3px;margin-left:12px}
+.hero-award h1{
+  font:400 clamp(5.35rem,11.8vw,11.9rem)/.87 "Cormorant Garamond",Georgia,serif;
+  letter-spacing:-.075em;margin:0 0 20px -9px;white-space:nowrap;
+  position:relative;z-index:1;
+}
+.hero-award h1 em{font-weight:400;font-style:italic}
+.hero-lower{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(315px,.78fr);align-items:start;gap:64px}
+.hero-award .subhead{margin:0;font-size:15px;line-height:1.85;max-width:590px;color:#4e5856}
+.hero-award .subhead strong{font-weight:600;color:var(--ink)}
+.hero-award .facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #7f827b;padding:0;margin:0;gap:0 19px}
+.hero-award .facts div{display:block;border-bottom:1px solid var(--rule);padding:10px 0 13px}
+.hero-award .facts dt{font-size:9px;margin:0 0 5px;letter-spacing:.14em;text-transform:uppercase}
+.hero-award .facts dd{font-size:12px;line-height:1.45;font-weight:600;letter-spacing:-.005em;margin:0}
+.relief-section{margin:13px 0 78px}
+.relief-frame{
+  position:relative;isolation:isolate;
+  width:100%;height:clamp(290px,33vw,430px);
+  background:linear-gradient(180deg,#12191c,#080e11);overflow:hidden;
+  box-shadow:0 24px 65px rgba(6,13,16,.15);border:1px solid #182126;
+}
+.relief-artwork{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;z-index:0;user-select:none;-webkit-user-drag:none}
+.relief-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(180deg,rgba(5,11,15,.62) 0%,rgba(5,11,15,.04) 18%,transparent 54%,rgba(5,11,15,.13) 72%,rgba(5,11,15,.84) 100%);}
+.relief-topline{position:absolute;top:24px;left:27px;right:27px;display:flex;justify-content:space-between;gap:16px;z-index:3;pointer-events:none;font-size:10px;letter-spacing:.145em;text-transform:uppercase;font-weight:700;color:#d5c8b4}
+.relief-topline span:last-child{color:#9baaa8;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.relief-line{
+  position:absolute;top:0;bottom:0;left:0;width:1px;background:rgba(245,224,185,.95);
+  box-shadow:0 0 18px rgba(218,187,132,.34);z-index:3;pointer-events:none;
+  will-change:left;transform:translateX(-.5px);
+}
+.relief-line-head{
+  position:absolute;top:52px;left:50%;width:9px;height:9px;transform:translate(-50%,-50%);
+  border-radius:50%;background:#f3ddba;box-shadow:0 0 0 6px rgba(234,205,161,.13),0 0 19px rgba(239,209,151,.52)
+}
+.relief-zones{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;
+  background:rgba(10,16,19,.84);border-top:1px solid rgba(233,221,199,.18);pointer-events:none;
+}
+.relief-zone{
+  flex-grow:0;flex-shrink:1;min-width:0;padding:12px 13px 13px;
+  border-right:1px solid rgba(221,216,196,.11);display:flex;align-items:baseline;gap:9px;
+  overflow:hidden;
+}
+.relief-zone:last-child{border-right:0}
+.relief-zone span{flex:none;font:italic 20px/.8 "Cormorant Garamond",Georgia,serif;color:#bea27d}
+.relief-zone strong{
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-weight:600;font-size:10px;letter-spacing:.01em;color:#bec6c1;
+}
+.relief-zone.is-active{background:rgba(205,180,142,.12)}
+.relief-zone.is-active strong{color:#f3e9d7}
+.relief-scrubber{
+  position:absolute;inset:0;z-index:6;cursor:crosshair;outline-offset:-5px;
+  background:transparent;
+}
+.relief-scrubber:focus-visible{outline:2px solid #ebcf9f;outline-offset:-6px}
+.relief-tip{
+  position:absolute;top:65px;left:50%;z-index:5;transform:translateX(-50%);
+  padding:5px 10px;color:#172023;background:#e6d6bb;min-width:56px;text-align:center;
+  font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;opacity:0;
+  pointer-events:none;transition:opacity .13s;
+}
+.relief-frame.is-hovering .relief-tip,.relief-scrubber:focus-visible~.relief-tip{opacity:1}
+.relief-caption{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:19px 1px 0}
+.relief-caption p{margin:0}
+.relief-caption .relief-fig{display:inline-block;color:var(--accent);letter-spacing:.14em;font-size:10px;font-weight:700;white-space:nowrap;margin-right:15px}
+.relief-caption .relief-desc{font-size:12px;line-height:1.65;color:var(--secondary)}
+.relief-caption .relief-desc strong{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600;color:var(--ink);margin-right:4px}
+.relief-help{font-size:11px;color:var(--secondary);text-align:right}
+.relief-help span{opacity:.8}
+.section-intro{margin-bottom:18px;padding-bottom:15px}
+.section-intro h2{font-size:33px;letter-spacing:-.015em}
+.section-intro .detail{font-size:11px}
+.section-no{letter-spacing:.175em}
+.player{background:linear-gradient(135deg,#1b2427,#11191c);border:1px solid #293236;border-radius:0;box-shadow:0 18px 46px rgba(17,24,26,.12)}
+.deck{padding:39px 44px 36px}
+.chapters{background:#182125;padding-top:38px}
+.chapters h3{margin-bottom:21px}
+.chapter{padding:20px 28px 19px;border-top-color:rgba(188,200,196,.13)}
+.chapter:last-of-type{border-bottom-color:rgba(188,200,196,.13)}
+.chapter:hover{background:#273235}
+.chapter[aria-current="true"]{background:#303e40;box-shadow:inset 2px 0 0 #d6b486}
+.chapter-index{font-family:"Cormorant Garamond",Georgia,serif;font-size:18px;font-style:italic;color:#c8af8d}
+.chapter-name strong{font-size:14px;font-weight:600}
+.chapter-time{font-size:11px}
+.now-label{margin-top:48px}
+#now-title{font-size:clamp(32px,3.8vw,49px);margin-bottom:0}
+.transport #toggle{background:#eee8dc;color:#1d2629;border-color:#eee8dc}
+.transport #toggle:hover{background:#fffaf1}
+.meters{border-top:1px solid #485759}
+.meter-head span:first-child{letter-spacing:.15em}
+.downloads,.credits{margin-top:82px}
+.download-card{border-radius:0;background:linear-gradient(160deg,#f9f8f3,#f2efe8);border-color:#bfc1bb;min-height:238px}
+.download-card .meta{letter-spacing:.165em}
+.download-card h3{font-size:clamp(29px,3.6vw,40px)}
+.credit-grid div{border-color:#c9c9c2}
+footer{margin-top:82px}
+@media(max-width:1100px){
+  .hero-award h1{font-size:clamp(5.25rem,10.8vw,10rem)}
+  .hero-lower{gap:38px}
+  .relief-zone{padding:11px 9px;gap:6px}
+  .relief-zone strong{font-size:9px}
+}
+@media(max-width:950px){
+  .hero-award{padding:44px 0 26px}
+  .hero-award h1{font-size:clamp(5rem,12vw,9.8rem)}
+  .hero-lower{grid-template-columns:1fr;gap:23px}
+  .hero-award .facts{max-width:700px}
+  .relief-section{margin-top:8px;margin-bottom:64px}
+  .relief-caption{flex-direction:column;align-items:flex-start;gap:7px}
+  .relief-help{text-align:left}
+  .relief-frame{height:clamp(320px,44vw,420px)}
+}
+@media(max-width:650px){
+  main{padding:0 20px 65px}
+  .hero-eyebrow{flex-wrap:wrap;gap:6px}
+  .hero-edition{font-size:8px}
+  .hero-heading{margin-top:23px}
+  .hero-award h1{white-space:normal;font-size:clamp(5.2rem,16.3vw,7.3rem);line-height:.82;margin-left:-5px}
+  .hero-award .subhead{font-size:13px;line-height:1.8}
+  .hero-award .facts{grid-template-columns:1fr 1fr;gap:0 12px}
+  .relief-frame{height:345px}
+  .relief-topline{left:17px;right:17px;top:17px;font-size:8px}
+  .relief-topline span:last-child{font-size:8px}
+  .relief-zone{padding:12px 4px;justify-content:center}
+  .relief-zone span{font-size:19px}
+  .relief-zone strong{display:none}
+  .relief-line-head{top:44px}
+  .relief-tip{top:60px}
+  .relief-caption .relief-fig{margin-right:7px}
+  .relief-caption .relief-desc{font-size:11px}
+  .relief-help span{display:none}
+  .section-intro h2{font-size:29px}
+  .deck{padding:29px 24px 32px}
+  .chapter{padding:17px 20px}
+  .credits,.downloads{margin-top:62px}
+}
+@media(prefers-reduced-motion:reduce){
+  .relief-tip{transition:none}
+  .relief-line{will-change:auto}
+}
+
 </style>
 </head>
 <body>
@@ -151,19 +318,43 @@ footer p{margin:0;max-width:660px}
   <div class="brand">Simon Fox-Gál <span aria-hidden="true">/</span> Classical Recording Production</div>
   <div class="record">LEIPZIG · 2026</div>
 </header>
-<section class="hero" aria-labelledby="title">
-  <div>
-    <div class="overline">Complete Listening Edition <span aria-hidden="true">—</span> Opus 50</div>
-    <div class="composer">HANS GÁL</div>
+
+<section class="hero hero-award" aria-labelledby="title">
+  <div class="hero-eyebrow"><span>Complete Listening Edition</span><span class="hero-edition">GEWANDHAUS LEIPZIG · 19.09.2026</span></div>
+  <div class="hero-heading">
+    <span class="hero-composer">HANS GÁL <span class="hero-opus">/ OP. 50</span></span>
     <h1 id="title"><em>De profundis</em></h1>
-    <p class="subhead">Kantate für vier Solostimmen, Chöre und Orchester. Konzertmitschnitt aus dem Großen Saal des Gewandhauses zu Leipzig unter der musikalischen Leitung von Gregor Meyer.</p>
   </div>
-  <dl class="facts" aria-label="Aufnahmedetails">
-    <div><dt>Werk</dt><dd>De profundis, op. 50</dd></div>
-    <div><dt>Aufnahme</dt><dd>19. September 2026<br>Gewandhaus zu Leipzig</dd></div>
-    <div><dt>Schnitt</dt><dd>29. Oktober 2026</dd></div>
-    <div><dt>Spieldauer</dt><dd>73:14 · Fünf Sätze</dd></div>
-  </dl>
+  <div class="hero-lower">
+    <p class="subhead">Kantate für vier Solostimmen, Chöre und Orchester. Aufgenommen im Großen Saal des Gewandhauses zu Leipzig unter der musikalischen Leitung von <strong>Gregor Meyer</strong>.</p>
+    <dl class="facts" aria-label="Aufnahmedetails">
+      <div><dt>WERK</dt><dd>De profundis, op. 50</dd></div>
+      <div><dt>AUFNAHME</dt><dd>19. September 2026 · Leipzig</dd></div>
+      <div><dt>SCHNITT</dt><dd>29. Oktober 2026</dd></div>
+      <div><dt>SPIELDAUER</dt><dd>73:14 · fünf Sätze</dd></div>
+    </dl>
+  </div>
+</section>
+<section class="relief-section" aria-labelledby="relief-title">
+  <div class="relief-frame" id="relief-frame">
+    <img class="relief-artwork" src="audio/sound-relief.svg" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+    <div class="relief-shade" aria-hidden="true"></div>
+    <div class="relief-topline" aria-hidden="true"><span>DE PROFUNDIS / KLANGRELIEF</span><span>73:14 · 640 ANALYSEFENSTER</span></div>
+    <div class="relief-line" id="relief-line" aria-hidden="true"><span class="relief-line-head"></span></div>
+    <div class="relief-tip" id="relief-tip" aria-hidden="true">00:00</div>
+    <div class="relief-zones" aria-hidden="true">
+      <div class="relief-zone" style="flex-basis:23.69821%" data-region="0"><span>I</span><strong>Von der Vergänglichkeit</strong></div>
+<div class="relief-zone" style="flex-basis:8.77658%" data-region="1"><span>II</span><strong>Auf grüner Erde</strong></div>
+<div class="relief-zone" style="flex-basis:22.13775%" data-region="2"><span>III</span><strong>Nachtgesänge</strong></div>
+<div class="relief-zone" style="flex-basis:23.20911%" data-region="3"><span>IV</span><strong>Totentanz</strong></div>
+<div class="relief-zone" style="flex-basis:22.13284%" data-region="4"><span>V</span><strong>Zum Frieden</strong></div>
+    </div>
+    <div class="relief-scrubber" id="relief-scrubber" role="slider" tabindex="0" aria-label="Im Klangrelief durch die Aufnahme navigieren" aria-valuemin="0" aria-valuemax="4394" aria-valuenow="0" aria-valuetext="00:00"></div>
+  </div>
+  <div class="relief-caption">
+    <p><span class="relief-fig">FIG. 01</span> <span class="relief-desc"><strong id="relief-title">Klangrelief.</strong> Ein grafisches Porträt des Mitschnitts, aus gemessener Dynamik, Klangfarbe und Impulsstruktur entwickelt.</span></p>
+    <p class="relief-help">Auf die Grafik klicken, um eine Stelle anzuwählen. <span>Auch mit der Tastatur bedienbar.</span></p>
+  </div>
 </section>
 
 <section aria-labelledby="listen-heading">
@@ -288,6 +479,60 @@ const subtitle=document.getElementById('now-sub');
 const elapsed=document.getElementById('elapsed');
 const remaining=document.getElementById('remaining');
 const chapterButtons=[...document.querySelectorAll('[data-chapter]')];
+
+const reliefFrame=document.getElementById('relief-frame');
+const reliefScrubber=document.getElementById('relief-scrubber');
+const reliefLine=document.getElementById('relief-line');
+const reliefTip=document.getElementById('relief-tip');
+const reliefRegions=[...document.querySelectorAll('[data-region]')];
+let lastReliefRegion=-1;
+function updateReliefPosition(t) {
+  const seconds=clamp(Number.isFinite(t)?t:0,0,durationFallback);
+  const ratio=seconds/durationFallback;
+  reliefLine.style.left=(100*ratio).toFixed(5)+'%';
+  reliefScrubber.setAttribute('aria-valuenow',String(Math.floor(seconds)));
+  reliefScrubber.setAttribute('aria-valuetext',formatTime(seconds)+' von 73:14');
+  let region=0;
+  chapters.forEach((c,i)=>{if(seconds>=c.start-.12)region=i});
+  if(region!==lastReliefRegion){
+    lastReliefRegion=region;
+    reliefRegions.forEach((x,i)=>x.classList.toggle('is-active',i===region));
+  }
+}
+function reliefTimeAtEvent(event){
+  const r=reliefFrame.getBoundingClientRect();
+  return clamp((event.clientX-r.left)/Math.max(1,r.width),0,1)*durationFallback;
+}
+function reliefSeek(time,autoPlay=true){
+  const target=clamp(time,0,durationFallback-.04);
+  pendingSeek=target;
+  if(audio.readyState>=1){audio.currentTime=target;pendingSeek=null}
+  updateReliefPosition(target);
+  if(autoPlay){if(audio.paused)play();else syncPosition()}
+  else syncPosition();
+}
+reliefScrubber.addEventListener('pointermove',(event)=>{
+  const t=reliefTimeAtEvent(event), rect=reliefFrame.getBoundingClientRect();
+  reliefTip.textContent=formatTime(t);
+  reliefTip.style.left=clamp((event.clientX-rect.left),36,rect.width-36).toFixed(1)+'px';
+  reliefFrame.classList.add('is-hovering');
+});
+reliefScrubber.addEventListener('pointerleave',()=>reliefFrame.classList.remove('is-hovering'));
+reliefScrubber.addEventListener('click',(event)=>reliefSeek(reliefTimeAtEvent(event),true));
+reliefScrubber.addEventListener('keydown',(event)=>{
+  let next=Number.isFinite(audio.currentTime)?audio.currentTime:0;
+  const shift=event.shiftKey?60:15;
+  if(event.key==='ArrowLeft'||event.key==='ArrowDown')next-=shift;
+  else if(event.key==='ArrowRight'||event.key==='ArrowUp')next+=shift;
+  else if(event.key==='Home')next=0;
+  else if(event.key==='End')next=durationFallback-.04;
+  else if(event.key===' '||event.key==='Enter'){event.preventDefault();togglePlayback();return}
+  else return;
+  event.preventDefault();
+  reliefSeek(next,false);
+  reliefTip.textContent=formatTime(next);
+});
+
 let chapter=0, hls=null, pendingSeek=null, desiredPlay=false, streamReady=false, audioContext=null, analysers=null;
 const durationFallback=4394.424;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
@@ -307,6 +552,7 @@ function syncPosition(){
   remaining.textContent='−'+formatTime(d-p);
   let idx=0;chapters.forEach((c,i)=>{if(p>=c.start-0.12)idx=i});
   if(idx!==chapter)activeChapter(idx);
+  updateReliefPosition(p);
 }
 function jump(index,shouldPlay=true){
   const c=chapters[clamp(index,0,chapters.length-1)];
@@ -367,6 +613,7 @@ function updateMeters(now){
       meter.setAttribute('aria-valuenow',heldPeak[ch].toFixed(1));
     }
   }
+  updateReliefPosition(audio.currentTime);
   window.requestAnimationFrame(updateMeters);
 }
 async function play(){
@@ -412,7 +659,7 @@ async function setupStream(){
   }
   setStatus('Dieser Browser unterstützt den Stream nicht. Bitte das MP3 unten herunterladen.',true)
 }
-activeChapter(0);syncPosition();setupStream();
+activeChapter(0);syncPosition();updateReliefPosition(0);setupStream();
 </script>
 </body>
 </html>
