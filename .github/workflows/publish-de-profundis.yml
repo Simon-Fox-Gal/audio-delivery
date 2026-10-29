@@ -26,12 +26,13 @@ jobs:
           set -euo pipefail
           for attempt in 1 2 3; do
             rm -f /tmp/de-profundis-source.mp3
-            if /tmp/gdown-env/bin/gdown --id 1mFwOWHHOsv0rKe3kGkFnGRyZf3X2lt27 -O /tmp/de-profundis-source.mp3; then
+            if /tmp/gdown-env/bin/gdown 1mFwOWHHOsv0rKe3kGkFnGRyZf3X2lt27 -O /tmp/de-profundis-source.mp3; then
               break
             fi
             echo "Download attempt $attempt failed"
             sleep 10
           done
+          test -f /tmp/de-profundis-source.mp3
           test "$(stat -c %s /tmp/de-profundis-source.mp3)" -eq 175778049
           ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 /tmp/de-profundis-source.mp3
       - name: Encode continuous stereo audio as browser-compatible HLS
