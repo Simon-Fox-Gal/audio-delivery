@@ -1,0 +1,48 @@
+{
+  "duration": 5959.213333333334,
+  "format": "AAC 320 kbit/s, 48 kHz, stereo",
+  "movements": [
+    {
+      "title": "Der Morgen",
+      "start": 0,
+      "duration": 812.5066666666667,
+      "mp3": "audio/01-der-morgen.mp3",
+      "driveId": "1scgmxQ0fzwjehnCAAT8LBQGcmKA801Vy"
+    },
+    {
+      "title": "Das Werk",
+      "start": 812.5066666666667,
+      "duration": 934.72,
+      "mp3": "audio/02-das-werk.mp3",
+      "driveId": "1lkfMV5Gpo65DAeMuPXWeFk74vKndyTi_"
+    },
+    {
+      "title": "Sinnen und Suchen",
+      "start": 1747.2266666666667,
+      "duration": 1354.48,
+      "mp3": "audio/03-sinnen-und-suchen.mp3",
+      "driveId": "1P248DZVNimDaYE9d-92dipzy3Yk-c26N"
+    },
+    {
+      "title": "Natur",
+      "start": 3101.706666666667,
+      "duration": 997.8666666666667,
+      "mp3": "audio/04-natur.mp3",
+      "driveId": "1uYQtDfQzRfM2zPJoGNxur7UbnA34h8ZY"
+    },
+    {
+      "title": "Dämmerung",
+      "start": 4099.573333333334,
+      "duration": 1062.6266666666668,
+      "mp3": "audio/05-daemmerung.mp3",
+      "driveId": "1q-xQULZMKDxUTwXSsqIEhwaozB1FHgtS"
+    },
+    {
+      "title": "Das ewige Licht",
+      "start": 5162.200000000001,
+      "duration": 797.0133333333333,
+      "mp3": "audio/06-das-ewige-licht.mp3",
+      "driveId": "1QT4qsCFUZCYMQAouPFkAE6EsK772ZD5C"
+    }
+  ]
+}
