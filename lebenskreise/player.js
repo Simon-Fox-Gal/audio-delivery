@@ -10,7 +10,7 @@
   let ready = false, queued = null, selected = 0, hls, context, analysers;
   const peaks = [{value: 0, until: 0}, {value: 0, until: 0}];
   const format = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
-  const indexAt = t => Math.max(0, movements.findLastIndex(m => t >= m.start));
+  const indexAt = t => Math.max(0, movements.findLastIndex(m => t + 0.05 >= m.start));
   function update() {
     const i = indexAt(audio.currentTime);
     selected = i;
@@ -25,7 +25,7 @@
     document.querySelector('#next').disabled = i === movements.length - 1;
   }
   function showError() {
-    status.textContent = 'Der Hörstream konnte nicht geladen werden. Die sechs Originale lassen sich unter „Audio & E-Book“ direkt in Google Drive anhören und herunterladen.';
+    status.textContent = 'Der Hörstream konnte nicht geladen werden. Die sechs Sätze lassen sich unter „Audio & E-Book“ als MP3 herunterladen.';
     status.classList.add('warn');
   }
   function initialise() {
@@ -75,6 +75,7 @@
   }
   audio.addEventListener('loadedmetadata', () => { if (queued !== null) { audio.currentTime = queued; queued = null; } update(); });
   audio.addEventListener('timeupdate', update);
+  audio.addEventListener('seeked', update);
   audio.addEventListener('play', () => { meterSetup(); status.textContent = 'Wiedergabe · AAC-Hörkopie · sechs Sätze in Originalreihenfolge'; status.classList.remove('warn'); update(); });
   audio.addEventListener('pause', update);
   audio.addEventListener('error', showError);
@@ -89,4 +90,4 @@
     else { const frame = d.querySelector('iframe'); frame.removeAttribute('src'); }
   }));
   update();
-})().catch(() => { document.querySelector('#status').textContent = 'Die Originalaufnahmen sind in der Dateiliste über Google Drive erreichbar.'; });
+})().catch(() => { document.querySelector('#status').textContent = 'Die sechs MP3-Hörkopien sind in der Dateiliste erreichbar.'; });
