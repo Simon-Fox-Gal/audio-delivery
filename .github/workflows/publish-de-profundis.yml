@@ -16,51 +16,101 @@ jobs:
     steps:
       - name: Check out listening-page repository
         uses: actions/checkout@v4
-      - name: Prepare Google Drive downloader
+      - name: Prepare lossless-master downloader and verification tools
         run: |
-          python3 -m venv /tmp/gdown-env
-          /tmp/gdown-env/bin/pip install -q gdown
-      - name: Install FFmpeg and FFprobe
-        run: |
+          python3 -m venv /tmp/audio-env
+          /tmp/audio-env/bin/pip install -q gdown numpy
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
-      - name: Download the link-shared preliminary master
+      - name: Download and validate the five original WAV masters
         shell: bash
         run: |
           set -euo pipefail
-          for attempt in 1 2 3; do
-            rm -f /tmp/de-profundis-source.mp3
-            if /tmp/gdown-env/bin/gdown 1mFwOWHHOsv0rKe3kGkFnGRyZf3X2lt27 -O /tmp/de-profundis-source.mp3; then
-              break
-            fi
-            echo "Download attempt $attempt failed"
-            sleep 10
-          done
-          test -f /tmp/de-profundis-source.mp3
-          test "$(stat -c %s /tmp/de-profundis-source.mp3)" -eq 175778049
-          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 /tmp/de-profundis-source.mp3
-      - name: Encode continuous stereo audio as browser-compatible HLS
+          /tmp/audio-env/bin/python <<'PY'
+          from concurrent.futures import ThreadPoolExecutor
+          from pathlib import Path
+          import gdown, wave, hashlib
+          root=Path('/tmp/de-profundis-wav')
+          root.mkdir(exist_ok=True)
+          ids=['1z-jYy4DXIvwjMlec88EKMrqYWuT_bRQF','1InpU42kFDqVa50ZliMkfJAsW9Q3inQbk','1rk73MDeeJFYtCcq6EZtN5a0M1iOmbO5p','1jL9-kssMdh41KFQLVphBBmxEvLFmW411','1EH4uw-wvJfl7hyfAyAHkVrKbNxrD1eiL']
+          def download(item):
+              i,file_id=item
+              path=root/f'{i+1:02d}.wav'
+              for attempt in range(3):
+                  try:
+                      result=gdown.download(id=file_id,output=str(path),quiet=True,use_cookies=False)
+                      assert result, 'Empty download result'
+                      with wave.open(str(path),'rb') as w:
+                          assert (w.getnchannels(),w.getframerate(),w.getsampwidth())==(2,96000,3), 'Unexpected master format'
+                          frames=w.getnframes()
+                      assert path.stat().st_size>=frames*6, 'Truncated WAV'
+                      print(path.name,frames,'frames',hashlib.sha256(path.read_bytes()).hexdigest(),flush=True)
+                      return frames/96000
+                  except Exception:
+                      if attempt==2: raise
+              raise RuntimeError('Download failed')
+          with ThreadPoolExecutor(max_workers=3) as pool:
+              durations=list(pool.map(download,enumerate(ids)))
+          starts=[2.0]
+          for duration in durations: starts.append(starts[-1]+duration)
+          expected=[2,1043.4,1429.08,2401.9066666666668,3421.8133333333335,4394.386666666667]
+          assert all(abs(a-b)<1/48000 for a,b in zip(starts,expected)), (starts,expected)
+          print('PASS: original 96 kHz / 24-bit masters; all movement boundaries match the existing timeline.')
+          (root/'concat.txt').write_text(''.join(f"file '{root}/{i+1:02d}.wav'\n" for i in range(5)))
+          PY
+      - name: Encode one continuous 320 kbit/s AAC stream directly from WAV
         shell: bash
         run: |
           set -euo pipefail
-          dest="de-profundis-agm-preview/audio/complete"
+          dest="de-profundis-agm-preview/audio/complete-320"
           mkdir -p "$dest"
-          rm -f "$dest"/part-*.ts "$dest"/index.m3u8
-          ffmpeg -hide_banner -nostdin -loglevel error -i /tmp/de-profundis-source.mp3 \
-            -map 0:a:0 -vn -c:a aac -b:a 192k -ar 48000 -ac 2 \
+          # The delivery MP3 has a two-second silent lead-in. Retain it so all
+          # movement buttons and the audio-derived relief keep their exact timing.
+          # Encode once across every movement; never restart the encoder per segment.
+          ffmpeg -hide_banner -nostdin -loglevel error \
+            -f concat -safe 0 -i /tmp/de-profundis-wav/concat.txt \
+            -map 0:a:0 -vn \
+            -af "adelay=2000:all=1,aresample=48000:resampler=soxr:precision=28" \
+            -c:a aac -b:a 320k -ar 48000 -ac 2 \
             -f hls -hls_time 18 -hls_playlist_type vod -hls_list_size 0 \
             -hls_segment_filename "$dest/part-%03d.ts" "$dest/index.m3u8"
-          test -s "$dest/index.m3u8"
           grep -q '#EXT-X-ENDLIST' "$dest/index.m3u8"
           du -sh "$dest"
-      - name: Commit stream segments to the existing Pages repository
+      - name: Verify decoded audio against WAV at the reported click positions
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/audio-env/bin/python <<'PY'
+          import subprocess, numpy as np
+          def decode(args):
+              return np.frombuffer(subprocess.run(
+                  ['ffmpeg','-v','error']+args+['-ac','2','-ar','48000','-f','f32le','pipe:1'],
+                  check=True,stdout=subprocess.PIPE).stdout,dtype='<f4').reshape(-1,2)
+          reference=decode(['-f','concat','-safe','0','-i','/tmp/de-profundis-wav/concat.txt',
+              '-af','adelay=2000:all=1,aresample=48000:resampler=soxr:precision=28','-t','306'])
+          # MPEG-TS does not signal AAC encoder priming: exclude its first 1024
+          # samples for a sample-aligned comparison with the lossless master.
+          encoded=decode(['-i','de-profundis-agm-preview/audio/complete-320/index.m3u8','-t','307'])[1024:]
+          assert abs(encoded[:48000]).max()<0.00001, 'Expected silent lead-in missing'
+          for time in [217.0,280.56154,289.81969,303.953]:
+              lo,hi=int((time-.5)*48000),int((time+.5)*48000)
+              error=encoded[lo:hi]-reference[lo:hi]
+              blocks=error[:len(error)//48*48].reshape(-1,48,2)
+              maximum=float(np.sqrt(np.mean(blocks*blocks,axis=(1,2))).max())
+              assert maximum<.006, (time,maximum,'Unexpected short error burst')
+              print('PASS:',time,'seconds; largest 1 ms error RMS',maximum)
+          peak=float(abs(encoded).max())
+          assert peak<1, ('Decoded AAC clipping',peak)
+          print('PASS: no clipping in the checked passage; no 192 kbit/s click spikes.')
+          PY
+      - name: Commit the verified stream without changing the current player
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add de-profundis-agm-preview/audio/complete/
+          git add de-profundis-agm-preview/audio/complete-320/
           if ! git diff --cached --quiet; then
-            git commit -m "Publish continuous five-movement De profundis listening stream"
+            git commit -m "Publish verified 320 kbit/s AAC stream encoded directly from WAV masters"
             git push
           fi
