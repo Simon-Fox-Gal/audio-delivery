@@ -23,7 +23,7 @@ jobs:
           if(!scripts.length)throw Error('No inline player code');
           scripts.forEach((source,i)=>new vm.Script(source,{filename:'inline-'+i+'.js'}));
           const required=[
-            'audio/sound-relief.svg','audio/complete/index.m3u8',
+            'audio/sound-relief.svg','audio/complete-320/index.m3u8',
             'PEAK_HOLD_MS=5000','reliefScrubber.addEventListener',
             'id="master-audio"','data-chapter="4"',
             'id="db-l"','id="db-r"',
@@ -78,8 +78,18 @@ jobs:
                 await page.screenshot({path:'/tmp/visuals/'+config.name+'-full.png',fullPage:true});
                 const width=await page.evaluate(()=>document.documentElement.scrollWidth);
                 if(width>config.width+3)throw Error(config.name+' horizontal overflow: '+width+'>'+config.width);
-                const loaded=await page.waitForFunction(()=>document.getElementById('master-audio').readyState>=1,null,{timeout:12000}).then(()=>true).catch(()=>false);
+                const loaded=await page.waitForFunction(()=>document.getElementById('master-audio').readyState>=1,null,{timeout:12000}).then(()=>true);
                 if(loaded){
+                  // Metadata and a "playing" event do not prove that audio advances.
+                  await page.locator('#toggle').click();
+                  await page.waitForFunction(()=>document.getElementById('master-audio').currentTime>1,
+                    null,{timeout:15000});
+                  const before=await page.locator('#master-audio').evaluate(a=>a.currentTime);
+                  await page.waitForTimeout(1500);
+                  const after=await page.locator('#master-audio').evaluate(a=>a.currentTime);
+                  if(after-before<.5)throw Error('Playback clock stalled: '+before+' -> '+after);
+                  await page.locator('#toggle').click();
+                  console.log(config.name,'audio advanced',before,'to',after);
                   await page.locator('[data-chapter="3"]').click();
                   await page.waitForTimeout(400);
                   const v=await page.locator('#now-title').innerText();

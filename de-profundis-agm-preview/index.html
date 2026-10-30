@@ -349,7 +349,7 @@ footer{margin-top:82px}
         <div class="meter"><label for="meter-r">R</label><div class="meter-track" id="meter-r" role="meter" aria-label="Pegel rechter Kanal" aria-valuemin="-60" aria-valuemax="0" aria-valuenow="-60"><div class="meter-fill"></div><div class="meter-peak"></div></div><span class="meter-value" id="db-r">−∞</span></div>
         <div class="db-scale"><span>−60</span><span>−48</span><span>−36</span><span>−24</span><span>−12</span><span>0</span></div>
       </div>
-      <div class="deck-foot"><label for="volume">LAUTSTÄRKE <input id="volume" type="range" min="0" max="1" step=".01" value="1" aria-label="Wiedergabelautstärke"></label><span>AAC 192 kbit/s · Webstream</span></div>
+      <div class="deck-foot"><label for="volume">LAUTSTÄRKE <input id="volume" type="range" min="0" max="1" step=".01" value="1" aria-label="Wiedergabelautstärke"></label><span>AAC 320 kbit/s · Webstream</span></div>
       <audio id="master-audio" preload="metadata" playsinline crossorigin="anonymous">Dieser Browser unterstützt keine Audiowiedergabe.</audio>
     </div>
     <nav class="chapters" aria-label="Satzwahl">
@@ -440,7 +440,7 @@ footer{margin-top:82px}
 <script src="vendor/hls-1.6.13.min.js"></script>
 <script>'use strict';
 const chapters=[{"title":"Von der Vergänglichkeit","poet":"Andreas Gryphius","start":2},{"title":"Auf grüner Erde","poet":"Paul Fleming","start":1043.4},{"title":"Nachtgesänge","poet":"Andreas Gryphius","start":1429.08},{"title":"Totentanz","poet":"","start":2401.9066666666668},{"title":"Zum Frieden","poet":"","start":3421.8133333333335}];
-const playlist='audio/complete/index.m3u8';
+const playlist='audio/complete-320/index.m3u8';
 const audio=document.getElementById('master-audio');
 const status=document.getElementById('status');
 const toggle=document.getElementById('toggle');
