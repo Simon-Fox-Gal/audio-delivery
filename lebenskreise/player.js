@@ -16,7 +16,7 @@
     selected = i;
     chapters.forEach((b, n) => b.setAttribute('aria-current', String(n === i)));
     document.querySelector('#now-title').textContent = movements[i].title;
-    document.querySelector('#now-sub').textContent = `${i + 1} / 6 · ${format(movements[i].duration)} · Hamburg 2009`;
+    document.querySelector('#now-sub').textContent = `${i + 1} / 6 · ${format(Math.round(movements[i].duration))} · Hamburg 2009`;
     timeline.value = audio.currentTime;
     document.querySelector('#elapsed').textContent = format(audio.currentTime);
     toggle.textContent = audio.paused ? '▶' : 'Ⅱ';

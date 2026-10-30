@@ -24,12 +24,47 @@ jobs:
           python3 -m venv /tmp/lebenskreise-env
           /tmp/lebenskreise-env/bin/pip install -q gdown numpy
       - name: Verify originals and produce listening copies
-        run: /tmp/lebenskreise-env/bin/python lebenskreise/tools/build_audio.py --wav-dir /tmp/lebenskreise-wav --download
+        run: |
+          if [ -f lebenskreise/audio-inventory.json ] && [ -f lebenskreise/audio/06-das-ewige-licht.mp3 ]; then
+            /tmp/lebenskreise-env/bin/python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          root=Path('lebenskreise')
+          for item in json.loads((root/'audio-inventory.json').read_text()):
+              p=root/item['path']
+              assert p.stat().st_size==item['bytes']
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256']
+          print('PASS: reuse previously verified listening derivatives, with every hash checked.')
+          PY
+          else
+            /tmp/lebenskreise-env/bin/python lebenskreise/tools/build_audio.py --wav-dir /tmp/lebenskreise-wav --download
+          fi
+      - name: Publish MP3 downloads outside the Pages bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="lebenskreise-hamburg-2009"
+          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "Hans Gál: Lebenskreise, Op. 70 - Hamburg 2009" \
+              --notes "Sechs MP3-Hörkopien der bereitgestellten WAV-Aufnahme. Chor und Orchester der Universität Hamburg, Bruno de Greeve; 1. Februar 2009. Werk, Mitwirkende und Quellen: https://simon-fox-gal.github.io/audio-delivery/lebenskreise/"
+          fi
+          gh release upload "$tag" lebenskreise/audio/*.mp3 --repo "$GITHUB_REPOSITORY" --clobber
+          gh release view "$tag" --repo "$GITHUB_REPOSITORY" --json assets > /tmp/lebenskreise-release.json
+          /tmp/lebenskreise-env/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          assets=json.loads(Path('/tmp/lebenskreise-release.json').read_text())['assets']
+          assert len(assets)==6
+          out=[{'name':a['name'],'url':a['url'],'bytes':a['size']} for a in assets]
+          Path('lebenskreise/downloads/mp3-assets.json').write_text(json.dumps(out,indent=2))
+          PY
       - name: Publish verified derivatives
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add lebenskreise/audio/ lebenskreise/audio-inventory.json lebenskreise/recording.json lebenskreise/klangkreise.svg
+          git rm --cached --ignore-unmatch lebenskreise/audio/*.mp3
+          git add lebenskreise/audio/complete/ lebenskreise/audio-inventory.json lebenskreise/recording.json lebenskreise/klangkreise.svg lebenskreise/downloads/mp3-assets.json
           if ! git diff --cached --quiet; then
             git commit -m "Publish verified Lebenskreise stream and six MP3 listening copies"
             git push
