@@ -274,6 +274,14 @@ footer{margin-top:82px}
   .dedication p{font-size:24px}
   .dedication-mark{font-size:62px}
 }
+
+.booklet-card{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 28px;margin-top:16px;padding:24px 31px;border:1px solid #bfc1bb;background:#f9f8f3}
+.booklet-card h3{font:500 28px/1.15 "Cormorant Garamond",Georgia,serif;margin:0 0 8px}
+.booklet-card p{font-size:13px;color:var(--secondary);margin:0}
+.booklet-card a{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:700;color:var(--accent)}
+.booklet-card a:hover{text-decoration:underline;text-underline-offset:3px}
+.booklet-card a span{font-size:20px}
+@media(max-width:620px){.booklet-card{padding:25px}}
 </style>
 </head>
 <body>
@@ -397,7 +405,11 @@ footer{margin-top:82px}
       <a href="https://drive.google.com/uc?export=download&amp;id=1fJMgFq7ogUTiY4pBJaDOOOEOeAzQID37" aria-label="Alle fünf WAV-Dateien als ZIP herunterladen">WAV-Archiv herunterladen <span aria-hidden="true">↓</span></a>
     </article>
   </div>
-  <p class="download-note">Die Dateien werden über Google Drive bereitgestellt. Bei großen Downloads kann Google eine Bestätigung verlangen.</p>
+  <article class="booklet-card" aria-labelledby="booklet-heading">
+    <div><h3 id="booklet-heading">Textheft (Deutsch)</h3><p>Vollständiger deutscher Text · PDF · 25 Seiten · 5,8 MB</p></div>
+    <a href="https://hansgal.org/storage/documents/de-profundis/De_Profundis_Deutsch.pdf" target="_blank" rel="noopener noreferrer" aria-label="Deutsches Textheft als PDF öffnen oder herunterladen">PDF herunterladen <span aria-hidden="true">↓</span></a>
+  </article>
+  <p class="download-note">Die Audiodateien werden über Google Drive bereitgestellt. Bei großen Downloads kann Google eine Bestätigung verlangen.</p>
   <details class="file-details">
     <summary>Einzelne Sätze als WAV herunterladen</summary>
     <ul class="file-list"><li><span class="file-num">01</span><span class="file-name">Von der Vergänglichkeit</span><a href="https://drive.google.com/uc?export=download&amp;id=1z-jYy4DXIvwjMlec88EKMrqYWuT_bRQF" aria-label="Von der Vergänglichkeit als WAV herunterladen">WAV <span aria-hidden="true">↓</span></a></li>
