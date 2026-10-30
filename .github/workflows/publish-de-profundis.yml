@@ -67,11 +67,13 @@ jobs:
           # The delivery MP3 has a two-second silent lead-in. Retain it so all
           # movement buttons and the audio-derived relief keep their exact timing.
           # Encode once across every movement; never restart the encoder per segment.
+          # TNS produced repeatable click spikes in this material. Disable TNS
+          # and perceptual noise substitution; keep 320k for the acoustic detail.
           ffmpeg -hide_banner -nostdin -loglevel error \
             -f concat -safe 0 -i /tmp/de-profundis-wav/concat.txt \
             -map 0:a:0 -vn \
             -af "adelay=2000:all=1,aresample=48000:resampler=soxr:precision=28" \
-            -c:a aac -b:a 320k -ar 48000 -ac 2 \
+            -c:a aac -b:a 320k -aac_tns 0 -aac_pns 0 -ar 48000 -ac 2 \
             -f hls -hls_time 18 -hls_playlist_type vod -hls_list_size 0 \
             -hls_segment_filename "$dest/part-%03d.ts" "$dest/index.m3u8"
           grep -q '#EXT-X-ENDLIST' "$dest/index.m3u8"
